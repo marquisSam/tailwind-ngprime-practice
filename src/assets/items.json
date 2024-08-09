@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "Potion of Healing",
+    "description": "A red liquid that glimmers when agitated. Heals 2d4+2 hit points when consumed.",
+    "type": "Potion",
+    "rarity": "Common",
+    "value": 50,
+    "weight": 0.5,
+    "properties": ["Consumable", "Healing"]
+  },
+  {
+    "id": 2,
+    "name": "Bag of Holding",
+    "description": "This bag has an interior space considerably larger than its outside dimensions, roughly 2 feet in diameter at the mouth and 4 feet deep.",
+    "type": "Wondrous Item",
+    "rarity": "Uncommon",
+    "value": 4000,
+    "weight": 15,
+    "properties": ["Extra-Dimensional Storage"]
+  },
+  {
+    "id": 3,
+    "name": "Cloak of Invisibility",
+    "description": "This cloak renders the wearer invisible as long as the hood is up.",
+    "type": "Wondrous Item",
+    "rarity": "Legendary",
+    "value": 50000,
+    "weight": 1.5,
+    "properties": ["Invisibility", "Attunement"]
+  },
+  {
+    "id": 4,
+    "name": "Ring of Protection",
+    "description": "A silver ring that grants a +1 bonus to AC and saving throws while worn.",
+    "type": "Ring",
+    "rarity": "Rare",
+    "value": 6000,
+    "weight": 0.1,
+    "properties": ["Bonus to AC", "Bonus to Saving Throws", "Attunement"]
+  },
+  {
+    "id": 5,
+    "name": "Wand of Magic Missiles",
+    "description": "This wand has 7 charges. While holding it, you can use an action to expend 1 or more of its charges to cast the Magic Missile spell.",
+    "type": "Wand",
+    "rarity": "Uncommon",
+    "value": 2000,
+    "weight": 1,
+    "properties": ["Spellcasting", "Charges"]
+  },
+  {
+    "id": 6,
+    "name": "Sword of Sharpness",
+    "description": "When you attack an object with this magic sword and hit, maximize your weapon damage dice against the target.",
+    "type": "Weapon (Greatsword)",
+    "rarity": "Very Rare",
+    "value": 15000,
+    "weight": 6,
+    "properties": ["Magic Weapon", "Increased Critical Damage"]
+  },
+  {
+    "id": 7,
+    "name": "Amulet of Health",
+    "description": "Your Constitution score is 19 while you wear this amulet.",
+    "type": "Wondrous Item",
+    "rarity": "Rare",
+    "value": 5000,
+    "weight": 0.5,
+    "properties": ["Increase Constitution", "Attunement"]
+  },
+  {
+    "id": 8,
+    "name": "Boots of Speed",
+    "description": "While you wear these boots, you can use a bonus action to click the boots' heels together. If you do, the boots double your walking speed, and any creature that makes an opportunity attack against you has disadvantage on the attack roll.",
+    "type": "Wondrous Item",
+    "rarity": "Rare",
+    "value": 3000,
+    "weight": 2,
+    "properties": ["Speed Increase", "Attunement"]
+  },
+  {
+    "id": 9,
+    "name": "Horn of Blasting",
+    "description": "You can use an action to speak the horn's command word and then blow the horn, which emits a thunderous blast in a 30-foot cone.",
+    "type": "Wondrous Item",
+    "rarity": "Rare",
+    "value": 1200,
+    "weight": 2,
+    "properties": ["Thunder Damage", "Cone Area Effect"]
+  },
+  {
+    "id": 10,
+    "name": "Staff of the Python",
+    "description": "You can use an action to speak this staff's command word and throw the staff on the ground within 10 feet of you. The staff becomes a Giant Constrictor Snake under your control.",
+    "type": "Staff",
+    "rarity": "Uncommon",
+    "value": 7500,
+    "weight": 4,
+    "properties": ["Summon Creature", "Attunement"]
+  }
+]
