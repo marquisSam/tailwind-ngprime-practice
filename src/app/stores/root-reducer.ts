@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import { Action, ActionReducerMap } from '@ngrx/store';
-import { DndItemsState } from './items/adapter';
-import { dndItemReducer } from './items/reducer';
+import { dndItemReducer, DndItemsState } from './items/reducer';
 
 export interface RootState {
   dndItems: DndItemsState;

@@ -1,15 +1,8 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { createItemSuccess } from './actions';
+import * as itemActions from './actions';
 import { DndItems } from './model';
 
-// Define the entity state interface
-export interface DnDItemState extends EntityState<DndItems[]> {}
-
-// Create the entity adapter
-export const dndItemAdapter = createEntityAdapter<DndItems>();
-
-// Define the initial state
 export const DndItemAdapter = createEntityAdapter<DndItems>({
   selectId: (item: DndItems) => item.id,
   sortComparer: (a: DndItems, b: DndItems): number => {
@@ -17,24 +10,22 @@ export const DndItemAdapter = createEntityAdapter<DndItems>({
   },
 });
 
-export interface DndItemsState extends EntityState<DndItems>, Cache {
+export interface DndItemsState extends EntityState<DndItems> {
   loaded: boolean;
 }
 
-// Create the reducer using the entity adapter
-const initialState: DndItemsState = {
-  ids: [],
-  entities: {},
-  loaded: false,
-  add: null,
-  addAll: null,
-  delete: null,
-  keys: null,
-  select: null,
-  selectAll: null,
-};
+const getAssetAllocationInitialState = () =>
+  DndItemAdapter.getInitialState({
+    loaded: false,
+  });
 
 export const dndItemReducer = createReducer(
-  initialState,
-  on(createItemSuccess, (state, { item }) => dndItemAdapter.addOne(item, state))
+  getAssetAllocationInitialState(),
+  on(itemActions.getItemsSuccess, (state, { items }) => {
+    console.log('reducer', items);
+    return DndItemAdapter.setAll(items, state);
+  }),
+  on(itemActions.createItemSuccess, (state, { item }) =>
+    DndItemAdapter.addOne(item, state)
+  )
 );
