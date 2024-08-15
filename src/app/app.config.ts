@@ -1,24 +1,22 @@
-import { ApplicationConfig, Provider } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { provideStore } from '@ngrx/store';
-import { routes } from './app.routes';
-import { reducers } from './stores/root-reducer';
-import { provideEffects } from '@ngrx/effects';
-import { DndItemEffects } from './stores/items/effects';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import {
-  provideStoreDevtools,
-  StoreDevtoolsModule,
-} from '@ngrx/store-devtools';
+import { ApplicationConfig, isDevMode } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { routes } from './app.routes';
+import { DndItemEffects } from './stores/items/effects';
+import { reducers } from './stores/root-reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
     provideHttpClient(withFetch()),
+    provideRouter(routes),
     provideStore(reducers),
     provideEffects([DndItemEffects]),
     provideStoreDevtools({
-      maxAge: 100,
+      maxAge: 25,
+      logOnly: !isDevMode(),
       connectInZone: true,
     }),
   ],

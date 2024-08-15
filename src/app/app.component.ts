@@ -3,15 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { TheCompendiumComponent } from './layout/the-compendium/the-compendium.component';
 import { ItemActions } from './stores/items';
 import { DndItems } from './stores/items/model';
 import { selectDndItems } from './stores/items/selectors';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, TheCompendiumComponent],
   providers: [],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

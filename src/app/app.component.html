@@ -1,5 +1,3 @@
-<h1 class="text-3xl font-bold underline">Hello world! ehhe</h1>
-<pre>
-
-  {{ selectDndItems$ | async | json }}
-</pre>
+<the-compendium-layout
+  [dndItems]="(selectDndItems$ | async) ?? []"
+></the-compendium-layout>
