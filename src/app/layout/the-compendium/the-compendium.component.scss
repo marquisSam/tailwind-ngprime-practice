@@ -1,7 +1,9 @@
 :host {
   display: block;
 }
-// .card-container {
-//   display: flex;
-//   overflow: hidden;
-// }
+.p-card {
+  height: 100%;
+}
+.p-card-content {
+  flex-grow: 1 !important;
+}
