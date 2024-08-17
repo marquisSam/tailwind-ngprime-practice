@@ -6,7 +6,7 @@
     <p-card
       [styleClass]="'shadow-lg overflow-hidden'"
       [header]="item.name"
-      [subheader]="'subheader'"
+      [subheader]="item.properties | appStringList"
     >
       <ng-template pTemplate="header">
         <img
