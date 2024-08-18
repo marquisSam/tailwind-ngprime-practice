@@ -17,7 +17,12 @@
       <p>{{ item.description }}</p>
       <ng-template pTemplate="footer">
         <div class="flex gap-3 mt-1">
-          <p-button label="Edit" class="w-full" styleClass="w-full" />
+          <p-button
+            label="View Item"
+            class="w-full"
+            styleClass="w-full"
+            (click)="openItem(item)"
+          />
         </div>
       </ng-template>
     </p-card>

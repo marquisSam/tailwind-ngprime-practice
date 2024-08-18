@@ -1,5 +1,10 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { ApplicationConfig, isDevMode } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  isDevMode,
+} from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
@@ -19,5 +24,6 @@ export const appConfig: ApplicationConfig = {
       logOnly: !isDevMode(),
       connectInZone: true,
     }),
+    importProvidersFrom(BrowserAnimationsModule),
   ],
 };
