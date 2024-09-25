@@ -10,6 +10,10 @@ import {
   DynamicDialogRef,
 } from 'primeng/dynamicdialog';
 import { ItemDetailsComponentComponent } from '../../dialogs/item-details-component/item-details-component.component';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectDndItems } from '../../stores/items/selectors';
+import { ItemsGridComponent } from '../../views/items-grid/items-grid.component';
 
 @Component({
   selector: 'the-compendium-layout',
@@ -19,6 +23,7 @@ import { ItemDetailsComponentComponent } from '../../dialogs/item-details-compon
     CardModule,
     ButtonModule,
     StringListPipe,
+    ItemsGridComponent,
     DynamicDialogModule,
   ],
   providers: [DialogService],
@@ -27,10 +32,11 @@ import { ItemDetailsComponentComponent } from '../../dialogs/item-details-compon
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TheCompendiumComponent {
-  constructor(private dialogService: DialogService) {}
-  @Input() dndItems: DndItems[] = [];
+  constructor(private dialogService: DialogService, private store: Store) {}
 
+  selectDndItems$: Observable<DndItems[]> = this.store.select(selectDndItems);
   ref: DynamicDialogRef | undefined;
+
   openItem(item: DndItems) {
     this.ref = this.dialogService.open(ItemDetailsComponentComponent, {
       header: 'Item Details',

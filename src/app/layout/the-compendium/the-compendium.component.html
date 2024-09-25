@@ -1,31 +1,5 @@
 <div
   class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
 >
-  @for (item of dndItems; track item.id) {
-  <div class="card-container">
-    <p-card
-      [styleClass]="'shadow-lg overflow-hidden'"
-      [header]="item.name"
-      [subheader]="item.properties | appStringList"
-    >
-      <ng-template pTemplate="header">
-        <img
-          alt="Card"
-          src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
-        />
-      </ng-template>
-      <p>{{ item.description }}</p>
-      <ng-template pTemplate="footer">
-        <div class="flex gap-3 mt-1">
-          <p-button
-            label="View Item"
-            class="w-full"
-            styleClass="w-full"
-            (click)="openItem(item)"
-          />
-        </div>
-      </ng-template>
-    </p-card>
-  </div>
-  }
+  <app-items-grid [coolItems]="(selectDndItems$ | async ) ?? []" (itemSelected)="openItem($event)"></app-items-grid>
 </div>

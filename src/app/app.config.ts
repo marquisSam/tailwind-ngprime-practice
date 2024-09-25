@@ -12,6 +12,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { routes } from './app.routes';
 import { DndItemEffects } from './stores/items/effects';
 import { reducers } from './stores/root-reducer';
+import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,5 +26,6 @@ export const appConfig: ApplicationConfig = {
       connectInZone: true,
     }),
     importProvidersFrom(BrowserAnimationsModule),
+    // MessageService
   ],
 };
