@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, finalize, map, of, switchMap, tap } from 'rxjs';
 import { ItemActions } from '.';
-import { DndItems } from './model';
+import { DndItem } from './model';
 import { itemsManagerService } from './service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoadingStateService } from '../loading-state.service';
@@ -24,7 +24,7 @@ export class DndItemEffects {
       switchMap(() => {
         this.loadingStateService.setLoading('getItems', true);
         return this.entityService.getAll().pipe(
-          map(({data}: ApiResponse<DndItems[]>) => ItemActions.getItemsSuccess(data)),
+          map(({data}: ApiResponse<DndItem[]>) => ItemActions.getItemsSuccess(data)),
           catchError((error: HttpErrorResponse) =>
             of(ItemActions.getItemsFailure({ error: error.message }))
           ),
@@ -37,10 +37,10 @@ export class DndItemEffects {
   createItem$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ItemActions.createItem),
-      switchMap(({ item }: { item: DndItems }) => {
+      switchMap(({ item }: { item: DndItem }) => {
         this.loadingStateService.setLoading('createItem', true);
         return this.entityService.create(item).pipe(
-          map(({data}: ApiResponse<DndItems>) => ItemActions.createItemSuccess(data)),
+          map(({data}: ApiResponse<DndItem>) => ItemActions.createItemSuccess(data)),
           catchError((error: HttpErrorResponse) =>
             of(ItemActions.createItemFailure({ error: error.message }))
           ),
@@ -53,7 +53,7 @@ export class DndItemEffects {
   createItemSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ItemActions.createItemSuccess),
-      tap(({ item }: { item: DndItems }) => {
+      tap(({ item }: { item: DndItem }) => {
         // this.messageService.add({ severity: 'success', summary: 'Success', detail: `Item ${item.name} created successfully` });
       })
     ),

@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { DndItems } from '../../stores/items/model';
+import { DndItem } from '../../stores/items/model';
 
 @Component({
   selector: 'app-item-details-component',
@@ -19,5 +19,5 @@ import { DndItems } from '../../stores/items/model';
 })
 export class ItemDetailsComponentComponent {
   constructor(private dialogConfig: DynamicDialogConfig) {}
-  item = signal<DndItems | null>(this.dialogConfig.data.item);
+  item = signal<DndItem | null>(this.dialogConfig.data.item);
 }

@@ -14,6 +14,7 @@ import { DndItemEffects } from './stores/items/effects';
 import { reducers } from './stores/root-reducer';
 import { MessageService } from 'primeng/api';
 import { BagsEffects } from './stores/bags/effects';
+import { OpenModalService } from './services/openModalService.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,6 +28,6 @@ export const appConfig: ApplicationConfig = {
       connectInZone: true,
     }),
     importProvidersFrom(BrowserAnimationsModule),
-    MessageService
+    MessageService,
   ],
 };

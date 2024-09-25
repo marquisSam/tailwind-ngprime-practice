@@ -1,16 +1,16 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import * as itemActions from './actions';
-import { DndItems } from './model';
+import { DndItem } from './model';
 
-export const DndItemAdapter = createEntityAdapter<DndItems>({
-  selectId: (item: DndItems) => item.id,
-  sortComparer: (a: DndItems, b: DndItems): number => {
+export const DndItemAdapter = createEntityAdapter<DndItem>({
+  selectId: (item: DndItem) => item.id,
+  sortComparer: (a: DndItem, b: DndItem): number => {
     return a.name.localeCompare(b.name);
   },
 });
 
-export interface DndItemsState extends EntityState<DndItems> {
+export interface DndItemsState extends EntityState<DndItem> {
   loaded: boolean;
 }
 

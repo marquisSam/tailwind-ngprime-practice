@@ -1,4 +1,4 @@
-export interface DndItems {
+export interface DndItem {
   id: number;
   name: string;
   description?: string;

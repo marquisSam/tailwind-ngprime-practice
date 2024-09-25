@@ -1,30 +1,41 @@
 import { Injectable } from '@angular/core';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BagDialogueComponent } from '../dialogs/bagDialogue/bagDialogue.component';
-
+import { DndItem } from '../stores/items/model';
+import { ItemDetailsComponentComponent } from '../dialogs/item-details-component/item-details-component.component';
+import { dialogMode } from '../dialogs/dialog-model';
+import { Bag } from '../stores/bags/model';
 @Injectable({
   providedIn: 'root'
 })
-export class OpenModalServiceService {
-  openBagDialog(): DynamicDialogRef {
+export class OpenModalService {
+
+  modalConfig: DynamicDialogConfig = {
+    width: '50vw',
+    modal: true,
+    breakpoints: {
+      '960px': '75vw',
+      '640px': '90vw',
+    },
+  };
+
+  openBagDialog(data?: Bag, mode: dialogMode = dialogMode.View): DynamicDialogRef {
     return this.dialogService.open(BagDialogueComponent, {
+      ...this.modalConfig,
       header: 'Add Bag',
-      width: '50vw',
-      modal: true,
-      breakpoints: {
-        '960px': '75vw',
-        '640px': '90vw',
+      data: {
+        mode,
+        data,
       },
     });
   }
-  openItemDialog(data: DndItem): DynamicDialogRef {
-    return this.dialogService.open(ItemDialogueComponent, {
+  openItemDialog(data?: DndItem, mode: dialogMode = dialogMode.View): DynamicDialogRef {
+    return this.dialogService.open(ItemDetailsComponentComponent, {
+      ...this.modalConfig,
       header: 'Add Item',
-      width: '50vw',
-      modal: true,
-      breakpoints: {
-        '960px': '75vw',
-        '640px': '90vw',
+      data: {
+        mode,
+        data,
       },
     });
   }

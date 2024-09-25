@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { DndItems } from '../../stores/items/model';
+import { DndItem } from '../../stores/items/model';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { StringListPipe } from '../../../custom-pipes/string-list.pipe';
@@ -20,6 +20,8 @@ import { ItemActions } from '../../stores/items';
 import { Bag } from '../../stores/bags/model';
 import { selectBags } from '../../stores/bags/selectors';
 import { ControllerComponent } from '../../views/controller/controller.component';
+import { OpenModalService } from '../../services/openModalService.service';
+import { dialogMode } from '../../dialogs/dialog-model';
 
 @Component({
   selector: 'the-compendium-layout',
@@ -34,15 +36,15 @@ import { ControllerComponent } from '../../views/controller/controller.component
     BagsGridComponent,
     ControllerComponent
   ],
-  providers: [DialogService],
+
   templateUrl: './the-compendium.component.html',
   styleUrl: './the-compendium.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TheCompendiumComponent implements OnInit {
-  constructor(private dialogService: DialogService, private store: Store) {}
+  constructor(private dialogService: DialogService, private store: Store, private openModalService: OpenModalService) {}
 
-  selectDndItems$: Observable<DndItems[]> = this.store.select(selectDndItems);
+  selectDndItems$: Observable<DndItem[]> = this.store.select(selectDndItems);
   selectBags$: Observable<Bag[]> = this.store.select(selectBags);
   ref: DynamicDialogRef | undefined;
 
@@ -51,18 +53,16 @@ export class TheCompendiumComponent implements OnInit {
     this.store.dispatch(ItemActions.getItems());
   }
 
-  openItem(item: DndItems) {
-    this.ref = this.dialogService.open(ItemDetailsComponentComponent, {
-      header: 'Item Details',
-      width: '50vw',
-      modal: true,
-      breakpoints: {
-        '960px': '75vw',
-        '640px': '90vw',
-      },
-      data: {
-        item,
-      },
-    });
+  openItem(item: DndItem) {
+    console.log('openItem',item);
+    this.openModalService.openItemDialog(item, dialogMode.View);
+  }
+  openBag(bag: Bag) {
+    console.log('openBag',bag);
+    this.openModalService.openBagDialog(bag, dialogMode.View);
+  }
+  createNewBag() {
+    console.log('createNewBag');
+    this.openModalService.openBagDialog(undefined, dialogMode.Create);
   }
 }

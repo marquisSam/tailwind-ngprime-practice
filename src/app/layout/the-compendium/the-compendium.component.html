@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-8">
-  <app-controller></app-controller>
+  <app-controller (openBagDialog)="openBag($event.data)" (createNewBag)="createNewBag()"></app-controller>
   <app-bags-grid [bags]="(selectBags$ | async) ?? []"></app-bags-grid>
   <app-items-grid [coolItems]="(selectDndItems$ | async ) ?? []" (itemSelected)="openItem($event)"></app-items-grid>
 </div>
