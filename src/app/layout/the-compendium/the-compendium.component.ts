@@ -19,6 +19,7 @@ import { BagsActions } from '../../stores/bags';
 import { ItemActions } from '../../stores/items';
 import { Bag } from '../../stores/bags/model';
 import { selectBags } from '../../stores/bags/selectors';
+import { ControllerComponent } from '../../views/controller/controller.component';
 
 @Component({
   selector: 'the-compendium-layout',
@@ -30,7 +31,8 @@ import { selectBags } from '../../stores/bags/selectors';
     StringListPipe,
     ItemsGridComponent,
     DynamicDialogModule,
-    BagsGridComponent
+    BagsGridComponent,
+    ControllerComponent
   ],
   providers: [DialogService],
   templateUrl: './the-compendium.component.html',
