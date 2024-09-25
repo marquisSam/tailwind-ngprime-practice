@@ -1,0 +1,7 @@
+<div class="flex flex-row gap-4">
+  @for (bag of bags; track bag.id) {
+    <p-card [header]="bag.name" class="max-w-[200px]">
+      <p>{{ bag.description }}</p>
+    </p-card>
+  }
+</div>

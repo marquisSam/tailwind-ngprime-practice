@@ -13,19 +13,20 @@ import { routes } from './app.routes';
 import { DndItemEffects } from './stores/items/effects';
 import { reducers } from './stores/root-reducer';
 import { MessageService } from 'primeng/api';
+import { BagsEffects } from './stores/bags/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withFetch()),
     provideRouter(routes),
     provideStore(reducers),
-    provideEffects([DndItemEffects]),
+    provideEffects([DndItemEffects, BagsEffects]),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
       connectInZone: true,
     }),
     importProvidersFrom(BrowserAnimationsModule),
-    // MessageService
+    MessageService
   ],
 };

@@ -1,5 +1,5 @@
-<div
-  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
->
+<div class="flex flex-col gap-8">
+  <app-bags-grid [bags]="(selectBags$ | async) ?? []"></app-bags-grid>
   <app-items-grid [coolItems]="(selectDndItems$ | async ) ?? []" (itemSelected)="openItem($event)"></app-items-grid>
 </div>
+

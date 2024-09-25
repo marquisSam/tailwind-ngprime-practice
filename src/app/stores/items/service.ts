@@ -12,9 +12,7 @@ export class itemsManagerService {
 
   // GET http://localhost:5113/api/items
   getAll(): Observable<ApiResponse<DndItems[]>> {
-    const dndItems = this.http.get<ApiResponse<DndItems[]>>('http://localhost:5113/api/items');
-    console.log('dndItems', dndItems);
-    return dndItems;
+    return this.http.get<ApiResponse<DndItems[]>>('http://localhost:5113/api/items');
   }
   // POST http://localhost:5113/api/items
   create(item: DndItems): Observable<ApiResponse<DndItems>> {

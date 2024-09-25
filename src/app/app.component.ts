@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TheCompendiumComponent } from './layout/the-compendium/the-compendium.component';
-import { ItemActions } from './stores/items';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +16,7 @@ export class AppComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(ItemActions.getItems());
+
   }
 
 

@@ -20,7 +20,6 @@ import { StringListPipe } from '../../../custom-pipes/string-list.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemsGridComponent {
-  constructor(private dialogService: DialogService) {}
   @Input() coolItems: DndItems[] = [];
   @Output() itemSelected = new EventEmitter<DndItems>();
  }
