@@ -1,27 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { DndItem } from '../../stores/items/model';
-import { CardModule } from 'primeng/card';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ButtonModule } from 'primeng/button';
-import { StringListPipe } from '../../../custom-pipes/string-list.pipe';
+import { CardModule } from 'primeng/card';
 import {
   DialogService,
   DynamicDialogModule,
   DynamicDialogRef,
 } from 'primeng/dynamicdialog';
-import { ItemDetailsComponentComponent } from '../../dialogs/item-details-component/item-details-component.component';
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { selectDndItems } from '../../stores/items/selectors';
-import { ItemsGridComponent } from '../../views/items-grid/items-grid.component';
-import { BagsGridComponent } from '../../views/bags-grid/bags-grid.component';
+import { StringListPipe } from '../../../custom-pipes/string-list.pipe';
+import { dialogMode } from '../../dialogs/dialog-model';
+import { OpenModalService } from '../../services/openModalService.service';
 import { BagsActions } from '../../stores/bags';
-import { ItemActions } from '../../stores/items';
 import { Bag } from '../../stores/bags/model';
 import { selectBags } from '../../stores/bags/selectors';
+import { ItemActions } from '../../stores/items';
+import { DndItem } from '../../stores/items/model';
+import { selectDndItems } from '../../stores/items/selectors';
+import { BagsGridComponent } from '../../views/bags-grid/bags-grid.component';
 import { ControllerComponent } from '../../views/controller/controller.component';
-import { OpenModalService } from '../../services/openModalService.service';
-import { dialogMode } from '../../dialogs/dialog-model';
+import { ItemsGridComponent } from '../../views/items-grid/items-grid.component';
 
 @Component({
   selector: 'the-compendium-layout',
@@ -68,5 +67,8 @@ export class TheCompendiumComponent implements OnInit {
   createNewItem() {
     console.log('createNewItem');
     this.openModalService.openItemDialog(undefined, dialogMode.Create);
+  }
+  deleteBag(bagId: string) {
+    console.log('deleteBag',bagId);
   }
 }

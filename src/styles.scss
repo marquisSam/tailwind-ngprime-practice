@@ -1,7 +1,7 @@
 :root {
   --background-color: rgba(	0, 139, 139, 0.3);
 }
-
+@import "primeicons/primeicons.css";
 
 @layer tailwind-base, tailwind-utilities, primeng;
 
@@ -14,8 +14,21 @@
   @tailwind utilities;
 }
 
-@layer primeng {}
+@layer primeng {
 
+}
+
+.extra-small-button{
+  height: 15px;
+  width: 15px;
+  padding: 5px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  .p-button-icon{
+    font-size: 8px;
+  }
+}
 body {
   background-color: var(--background-color);
 }

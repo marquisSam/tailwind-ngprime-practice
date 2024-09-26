@@ -4,6 +4,7 @@ import { FormBagComponent } from '../../forms/form-bag/form-bag.component';
 import { BagsCreateDTO } from '../../stores/bags/model';
 import { Store } from '@ngrx/store';
 import { BagsActions } from '../../stores/bags';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-bag-dialogue',
@@ -17,10 +18,11 @@ import { BagsActions } from '../../stores/bags';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BagDialogueComponent {
-  constructor(private store: Store) { }
+  constructor(private store: Store, public ref: DynamicDialogRef) { }
 
   submitForm(data: BagsCreateDTO) {
-    console.log('bag data', data);
-    this.store.dispatch(BagsActions.createBag(data));
+      console.log('bag data', data);
+      this.store.dispatch(BagsActions.createBag(data));
+      this.ref.close();
   }
 }

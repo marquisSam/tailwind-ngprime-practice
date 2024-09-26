@@ -57,6 +57,7 @@ export class BagsEffects {
     this.actions$.pipe(
       ofType(BagsActions.createBagSuccess),
       tap(({ item }: { item: Bag }) => {
+        console.log('effect bag create success', item);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: `Bag created successfully : ${item.name}` });
       })
     ),
