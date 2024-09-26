@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BagsCreateDTO } from '../../stores/bags/model';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -27,14 +27,21 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormBagComponent {
-  constructor(private fb: FormBuilder) {}
-  form = this.fb.group<BagsCreateDTO>({
-    name: '',
-    description: '',
-    capacity: 0,
+  @Output() submitForm = new EventEmitter<BagsCreateDTO>();
+  constructor(private fb: FormBuilder) { }
+
+  form = this.fb.nonNullable.group({
+    name: ['', [Validators.required]],
+    description: [''],
+    capacity: [0, [Validators.required]],
   });
 
+  get formValid() {
+    return this.form.valid;
+  }
+
   onSubmit() {
-    console.log(this.form.value);
+    if (!this.formValid) return
+    this.submitForm.emit(this.form.getRawValue());
   }
 }

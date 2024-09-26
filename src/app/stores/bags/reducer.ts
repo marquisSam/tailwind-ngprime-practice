@@ -26,7 +26,8 @@ export const bagsReducer = createReducer(
     console.log('reducer bag get success', items);
     return BagsAdapter.setAll(items, state);
   }),
-  on(BagsActions.createBagSuccess, (state, { item }) =>
-    BagsAdapter.addOne(item, state)
-  )
+  on(BagsActions.createBagSuccess, (state, { item }) => {
+    console.log('reducer bag create success', item);
+    return BagsAdapter.addOne(item, state);
+  })
 );

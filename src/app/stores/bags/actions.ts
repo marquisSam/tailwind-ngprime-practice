@@ -15,7 +15,7 @@ export const getBagsFailure = createAction(
 // Create Item
 export const createBag = createAction(
   '[Bags] Create Bag',
-  (item: BagsCreateDTO) => ({ item })
+  (data: BagsCreateDTO) => ({ data })
 );
 export const createBagSuccess = createAction(
   '[Bags] Create Bag Success',

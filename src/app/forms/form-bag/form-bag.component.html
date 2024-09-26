@@ -1,37 +1,44 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="">
-  <p-floatLabel>
-    <input pInputText id="name" formControlName="name" />
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="pt-5">
+  <p-floatLabel >
+    <input pInputText id="name" formControlName="name" class="w-full" />
     <label for="name">Name</label>
   </p-floatLabel>
 
   <p-divider />
 
-  <p-floatLabel>
-    <p-inputNumber
-      inputId="integeronly"
-      formControlName="capacity"
-      mode="decimal"
-      min="0"
-      max="500"
-      minFractionDigits="0"
-      maxFractionDigits="0"
-    />
-    <label for="capacity">Capacity</label>
-  </p-floatLabel>
+  <div class="pt-3">
+    <p-floatLabel>
+      <p-inputNumber
+        inputId="integeronly"
+        formControlName="capacity"
+        mode="decimal"
+        min="0"
+        max="500"
+        minFractionDigits="0"
+        maxFractionDigits="0"
+      />
+      <label for="capacity">Capacity</label>
+    </p-floatLabel>
+  </div>
 
   <p-divider />
 
-  <p-floatLabel>
-    <textarea
+  <div class="pt-3">
+    <p-floatLabel>
+      <textarea
       rows="5"
+      class="w-full"
       cols="30"
       pInputTextarea
       formControlName="description">
     </textarea>
     <label for="description">Description</label>
-  </p-floatLabel>
+    </p-floatLabel>
+  </div>
 
   <p-divider />
 
-  <button pButton type="submit">Submit</button>
+  <div class="flex justify-end">
+    <button pButton type="submit" [disabled]="!formValid">Submit</button>
+  </div>
 </form>

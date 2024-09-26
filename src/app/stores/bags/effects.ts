@@ -40,9 +40,9 @@ export class BagsEffects {
   createBag$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BagsActions.createBag),
-      switchMap(({ item }: { item: BagsCreateDTO }) => {
+      switchMap(({ data }: { data: BagsCreateDTO }) => {
         this.loadingStateService.setLoading('createItem', true);
-        return this.bagsService.create(item).pipe(
+        return this.bagsService.create(data).pipe(
           map(({data}: ApiResponse<Bag>) => BagsActions.createBagSuccess(data)),
           catchError((error: HttpErrorResponse) =>
             of(BagsActions.createBagFailure({ error: error.message }))
