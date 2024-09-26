@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { TheCompendiumComponent } from './layout/the-compendium/the-compendium.component';
+import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { TheCompendiumComponent } from './layout/the-compendium/the-compendium.component';
 import { OpenModalService } from './services/openModalService.service';
 
 @Component({
@@ -15,10 +15,10 @@ import { OpenModalService } from './services/openModalService.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  constructor(private store: Store) {}
+  constructor( private primengConfig: PrimeNGConfig) {}
 
   ngOnInit(): void {
-
+    this.primengConfig.ripple = true;
   }
 
 

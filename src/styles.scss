@@ -1,17 +1,23 @@
-@layer tailwind-base, primeng, tailwind-utilities;
+:root {
+  --background-color: rgba(	0, 139, 139, 0.3);
+}
+
+
+@layer tailwind-base, tailwind-utilities, primeng;
+
 @layer tailwind-base {
   @tailwind base;
 }
-@layer primeng;
+
 @layer tailwind-utilities {
   @tailwind components;
   @tailwind utilities;
 }
 
-:host {
-  --background-color: rgba(	0, 139, 139, 0.8);
-}
+@layer primeng {}
 
 body {
   background-color: var(--background-color);
 }
+
+

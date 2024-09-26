@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="">
+  <p-floatLabel>
+    <input pInputText id="name" formControlName="name" />
+    <label for="name">Name</label>
+  </p-floatLabel>
+
+  <p-divider />
+
+  <p-floatLabel>
+    <p-inputNumber
+      inputId="integeronly"
+      formControlName="capacity"
+      mode="decimal"
+      min="0"
+      max="500"
+      minFractionDigits="0"
+      maxFractionDigits="0"
+    />
+    <label for="capacity">Capacity</label>
+  </p-floatLabel>
+
+  <p-divider />
+
+  <p-floatLabel>
+    <textarea
+      rows="5"
+      cols="30"
+      pInputTextarea
+      formControlName="description">
+    </textarea>
+    <label for="description">Description</label>
+  </p-floatLabel>
+
+  <p-divider />
+
+  <button pButton type="submit">Submit</button>
+</form>

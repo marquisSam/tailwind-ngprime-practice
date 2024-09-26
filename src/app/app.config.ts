@@ -9,12 +9,11 @@ import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { MessageService } from 'primeng/api';
 import { routes } from './app.routes';
+import { BagsEffects } from './stores/bags/effects';
 import { DndItemEffects } from './stores/items/effects';
 import { reducers } from './stores/root-reducer';
-import { MessageService } from 'primeng/api';
-import { BagsEffects } from './stores/bags/effects';
-import { OpenModalService } from './services/openModalService.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [

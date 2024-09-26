@@ -1,3 +1,4 @@
-<div class="flex flex-col gap-4">
-  <p-button label="Ajouter un sac" (onClick)="createNewBag.emit()"></p-button>
+<div class="flex flex-row gap-4">
+    <p-button (onClick)="createNewBag.emit()" label="Ajouter un sac" icon="pi pi-check" pRipple />
+    <p-button (onClick)="createNewItem.emit()" label="Créer un nouvel item" icon="pi pi-trash" pRipple />
 </div>

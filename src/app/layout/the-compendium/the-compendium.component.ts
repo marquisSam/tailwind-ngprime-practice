@@ -65,4 +65,8 @@ export class TheCompendiumComponent implements OnInit {
     console.log('createNewBag');
     this.openModalService.openBagDialog(undefined, dialogMode.Create);
   }
+  createNewItem() {
+    console.log('createNewItem');
+    this.openModalService.openItemDialog(undefined, dialogMode.Create);
+  }
 }
