@@ -22,7 +22,6 @@ const getAssetAllocationInitialState = () =>
 export const dndItemReducer = createReducer(
   getAssetAllocationInitialState(),
   on(itemActions.getItemsSuccess, (state, { items }) => {
-    console.log('reducer', items);
     return DndItemAdapter.setAll(items, state);
   }),
   on(itemActions.createItemSuccess, (state, { item }) =>

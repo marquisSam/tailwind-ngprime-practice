@@ -10,27 +10,13 @@ import {
   providedIn: 'root',
 })
 export class LoadingStateService {
-  private loadingStates = new Map<string, WritableSignal<boolean>>();
+  bagIsGetting = signal<boolean>(false);
+  bagIsCreating = signal<boolean>(false);
+  bagIsUpdating = signal<boolean>(false);
+  bagIsDeleting = signal<boolean>(false);
 
-  setLoading(key: string, isLoading: boolean): void {
-    if (!this.loadingStates.has(key)) {
-      this.loadingStates.set(key, signal(false));
-    }
-    this.loadingStates.get(key)!.set(isLoading);
-  }
-
-  isLoading(key: string): Signal<boolean> {
-    if (!this.loadingStates.has(key)) {
-      this.loadingStates.set(key, signal(false));
-    }
-    return this.loadingStates.get(key)!;
-  }
-
-  isAnyLoading(): Signal<boolean> {
-    return computed(() =>
-      Array.from(this.loadingStates.values()).some((state) => state())
-    );
-  }
-
-  constructor() {}
+  itemIsGetting = signal<boolean>(false);
+  itemIsCreating = signal<boolean>(false);
+  itemIsUpdating = signal<boolean>(false);
+  itemIsDeleting = signal<boolean>(false);
 }

@@ -21,7 +21,6 @@ export class BagDialogueComponent {
   constructor(private store: Store, public ref: DynamicDialogRef) { }
 
   submitForm(data: BagsCreateDTO) {
-      console.log('bag data', data);
       this.store.dispatch(BagsActions.createBag(data));
       this.ref.close();
   }

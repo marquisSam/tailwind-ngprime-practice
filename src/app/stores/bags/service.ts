@@ -12,11 +12,13 @@ export class BagsService {
 
   // GET http://localhost:5113/api/items
   getAll(): Observable<ApiResponse<Bag[]>> {
-    console.log('service getAll');
     return this.http.get<ApiResponse<Bag[]>>('http://localhost:5113/api/bags');
   }
   // POST http://localhost:5113/api/items
   create(item: BagsCreateDTO): Observable<ApiResponse<Bag>> {
     return this.http.post<ApiResponse<Bag>>('http://localhost:5113/api/bags', item);
+  }
+  delete(guid: string): Observable<ApiResponse<Bag>> {
+    return this.http.delete<ApiResponse<Bag>>(`http://localhost:5113/api/bags/${guid}`);
   }
 }

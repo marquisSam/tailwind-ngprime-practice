@@ -14,6 +14,8 @@ import { routes } from './app.routes';
 import { BagsEffects } from './stores/bags/effects';
 import { DndItemEffects } from './stores/items/effects';
 import { reducers } from './stores/root-reducer';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingStateService } from './stores/loading-state.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,6 +29,7 @@ export const appConfig: ApplicationConfig = {
       connectInZone: true,
     }),
     importProvidersFrom(BrowserAnimationsModule),
+    importProvidersFrom(NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })),
     MessageService,
   ],
 };

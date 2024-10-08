@@ -1,8 +1,21 @@
 <div class="flex flex-row gap-4">
   @for (bag of bags; track bag.id) {
-    <p-card [header]="bag.name" class="max-w-[200px] relative">
+    <p-card [header]="bag.name" styleClass="w-[200px] h-[200px] relative" >
       <p-button (click)="deleteBag.emit(bag.id)" styleClass="extra-small-button" icon="pi pi-times" [outlined]="true" size="small" [rounded]="true" [raised]="true" severity="danger" />
       <p>{{ bag.description }}</p>
+      <ngx-spinner [name]="bag.id" size="large" [fullScreen]="false"></ngx-spinner>
     </p-card>
   }
+  <div class="bg-whiteborder-round border-1 surface-border p-4 surface-card" styleClassstyleClass="w-[200px] h-[200px]" *ngIf="bagIsCreating()">
+    <div class="flex mb-3">
+        <p-skeleton shape="circle" size="4rem" styleClass="mr-2" />
+        <div>
+            <p-skeleton width="10rem" styleClass="mb-2" />
+            <p-skeleton width="5rem" styleClass="mb-2" />
+            <p-skeleton height=".5rem" />
+        </div>
+    </div>
+    <p-skeleton width="100%" height="1rem" />
+
+  </div>
 </div>

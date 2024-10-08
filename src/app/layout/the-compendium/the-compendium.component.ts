@@ -53,22 +53,18 @@ export class TheCompendiumComponent implements OnInit {
   }
 
   openItem(item: DndItem) {
-    console.log('openItem',item);
     this.openModalService.openItemDialog(item, dialogMode.View);
   }
   openBag(bag: Bag) {
-    console.log('openBag',bag);
     this.openModalService.openBagDialog(bag, dialogMode.View);
   }
   createNewBag() {
-    console.log('createNewBag');
     this.openModalService.openBagDialog(undefined, dialogMode.Create);
   }
   createNewItem() {
-    console.log('createNewItem');
     this.openModalService.openItemDialog(undefined, dialogMode.Create);
   }
   deleteBag(bagId: string) {
-    console.log('deleteBag',bagId);
+    this.store.dispatch(BagsActions.deleteBag(bagId));
   }
 }

@@ -25,3 +25,17 @@ export const createBagFailure = createAction(
   '[Bags] Create Bag Failure',
   (error: any) => ({ error })
 );
+
+// Delete Bag
+export const deleteBag = createAction(
+  '[Bags] Delete Bag',
+  (guid: string) => ({ guid })
+);
+export const deleteBagSuccess = createAction(
+  '[Bags] Delete Bag Success',
+  (data: Bag) => ({ data })
+);
+export const deleteBagFailure = createAction(
+  '[Bags] Delete Bag Failure',
+  (error: any) => ({ error })
+);

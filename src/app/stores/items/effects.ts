@@ -22,13 +22,13 @@ export class DndItemEffects {
     this.actions$.pipe(
       ofType(ItemActions.getItems),
       switchMap(() => {
-        this.loadingStateService.setLoading('getItems', true);
+        this.loadingStateService.itemIsGetting.set(true);
         return this.entityService.getAll().pipe(
           map(({data}: ApiResponse<DndItem[]>) => ItemActions.getItemsSuccess(data)),
           catchError((error: HttpErrorResponse) =>
             of(ItemActions.getItemsFailure({ error: error.message }))
           ),
-          finalize(() => this.loadingStateService.setLoading('getItems', false))
+          finalize(() => this.loadingStateService.itemIsGetting.set(false))
         );
       })
     )
@@ -38,13 +38,13 @@ export class DndItemEffects {
     this.actions$.pipe(
       ofType(ItemActions.createItem),
       switchMap(({ item }: { item: DndItem }) => {
-        this.loadingStateService.setLoading('createItem', true);
+        this.loadingStateService.itemIsCreating.set(true);
         return this.entityService.create(item).pipe(
           map(({data}: ApiResponse<DndItem>) => ItemActions.createItemSuccess(data)),
           catchError((error: HttpErrorResponse) =>
             of(ItemActions.createItemFailure({ error: error.message }))
           ),
-          finalize(() => this.loadingStateService.setLoading('createItem', false))
+          finalize(() => this.loadingStateService.itemIsCreating.set(false))
         )
       })
     )

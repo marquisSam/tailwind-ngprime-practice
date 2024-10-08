@@ -23,11 +23,12 @@ const getBagsInitialState = () =>
 export const bagsReducer = createReducer(
   getBagsInitialState(),
   on(BagsActions.getBagsSuccess, (state, { items }) => {
-    console.log('reducer bag get success', items);
     return BagsAdapter.setAll(items, state);
   }),
   on(BagsActions.createBagSuccess, (state, { item }) => {
-    console.log('reducer bag create success', item);
     return BagsAdapter.addOne(item, state);
+  }),
+  on(BagsActions.deleteBagSuccess, (state, { data }) => {
+    return BagsAdapter.removeOne(data.id, state);
   })
 );
