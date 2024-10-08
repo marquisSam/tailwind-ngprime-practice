@@ -1,0 +1,96 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="pt-5">
+  <div class="grid grid-cols-2 gap-8">
+    <!-- Name -->
+    <p-floatLabel class="col-span-2">
+      <input pInputText id="name" formControlName="name" class="w-full" />
+      <label for="name">Name</label>
+    </p-floatLabel>
+
+    <!-- Weight -->
+    <p-floatLabel>
+        <p-inputNumber
+          class="w-full"
+          styleClass="w-full"
+          inputId="weight"
+          formControlName="weight"
+          min="0"
+          max="500"
+          minFractionDigits="0"
+          maxFractionDigits="0"
+        />
+      <label for="weight">Weight</label>
+    </p-floatLabel>
+
+    <!-- Value -->
+    <p-floatLabel class="w-full">
+      <p-inputNumber
+        class="w-full"
+        styleClass="w-full"
+        inputId="value"
+        formControlName="value"
+        min="0"
+        max="500"
+        minFractionDigits="0"
+        maxFractionDigits="0"
+        />
+      <label for="value">Value</label>
+    </p-floatLabel>
+
+    <!-- Rarity -->
+    <p-floatLabel class="w-full">
+      <p-dropdown
+        class="w-full"
+        styleClass="w-full"
+        formControlName="rarity"
+        [options]="rarities"
+        optionValue="value"
+        optionLabel="label"
+        />
+      <label for="rarity">Rarity</label>
+    </p-floatLabel>
+
+    <!-- Type -->
+    <p-floatLabel class="w-full">
+      <p-dropdown
+        class="w-full"
+        styleClass="w-full"
+        formControlName="type"
+        [options]="types"
+        optionValue="value"
+        optionLabel="label"
+        />
+      <label for="type">Type</label>
+    </p-floatLabel>
+
+    <!-- Properties -->
+    <p-floatLabel class="col-span-2">
+        <p-multiSelect
+          class="w-full"
+          styleClass="w-full"
+          [options]="properties"
+          formControlName="properties"
+          optionValue="value"
+          optionLabel="label"
+          placeholder="Select Properties" />
+      <label for="properties">Properties</label>
+    </p-floatLabel>
+
+    <!-- Description -->
+    <p-floatLabel class="col-span-2">
+      <textarea
+        rows="5"
+        class="w-full"
+        cols="30"
+        pInputTextarea
+        formControlName="description">
+      </textarea>
+      <label for="description">Description</label>
+    </p-floatLabel>
+  </div>
+
+  <p-divider />
+
+  <div class="flex justify-end">
+    <button pButton type="submit" [disabled]="!formValid">Submit</button>
+  </div>
+</form>

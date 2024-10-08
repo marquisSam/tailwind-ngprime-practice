@@ -9,6 +9,24 @@ export interface DndItem {
   properties?: DndItemProperties[];
 }
 
+export interface DndItemCreateDTO {
+  name: string;
+  description?: string | null;
+  value?: number | null;
+  weight?: number | null;
+  rarity?: DndItemRarity | null;
+  type?: DndItemType | null;
+  properties?: DndItemProperties[] | [] | null;
+}
+export interface DndItemUpdateDTO {
+  name?: string;
+  description?: string;
+  value?: number;
+  weight?: number;
+  rarity?: DndItemRarity;
+  type?: DndItemType;
+  properties?: DndItemProperties[];
+}
 export enum DndItemProperties {
   Consumable = 'Consumable',
   Healing = 'Healing',
@@ -59,3 +77,24 @@ export enum DndItemRarity {
   Artifact = 'Artifact',
   Varies = 'Varies', // Sometimes used for items with rarity that can change or is not fixed.
 }
+
+interface Option {
+  label: string;
+  value: any;
+}
+
+export const DndItemRarityOptions: Option[] = Object.entries(DndItemRarity).map(([key, value]) => ({
+  label: value,
+  value: key,
+}));
+
+export const DndItemTypeOptions: Option[] = Object.entries(DndItemType).map(([key, value]) => ({
+  label: value,
+  value: key,
+}));
+
+export const DndItemPropertiesOptions: Option[] = Object.entries(DndItemProperties).map(([key, value]) => ({
+  label: value,
+  value: key,
+}));
+

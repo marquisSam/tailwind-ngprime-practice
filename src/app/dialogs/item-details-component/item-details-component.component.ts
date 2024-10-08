@@ -8,11 +8,12 @@ import {
 } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DndItem } from '../../stores/items/model';
+import { FormItemComponent } from '../../forms/form-item/form-item.component';
 
 @Component({
   selector: 'app-item-details-component',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormItemComponent],
   templateUrl: './item-details-component.component.html',
   styleUrl: './item-details-component.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
