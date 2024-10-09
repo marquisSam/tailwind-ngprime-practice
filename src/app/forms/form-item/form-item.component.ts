@@ -1,16 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { DndItemCreateDTO, DndItemProperties, DndItemPropertiesOptions, DndItemRarity, DndItemRarityOptions, DndItemType, DndItemTypeOptions } from '../../stores/items/model';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
-import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DndItem, DndItemCreateDTO, DndItemProperties, DndItemPropertiesOptions, DndItemRarity, DndItemRarityOptions, DndItemType, DndItemTypeOptions } from '../../stores/items/model';
 
 import { MultiSelectModule } from 'primeng/multiselect';
+import { dialogMode } from '../../dialogs/dialog-model';
+import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
 interface FormItem {
   name: FormControl<string>;
   description: FormControl<string | null>;
@@ -41,14 +44,33 @@ interface FormItem {
   styleUrl: './form-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormItemComponent {
+export class FormItemComponent  {
+  constructor(private fb: FormBuilder) {
+    this.form.valueChanges.pipe(
+      debounceTime(300),
+      takeUntilDestroyed(),
+      distinctUntilChanged(),
+      map(() => this.form.valid),
+      tap(valid => this.formValid.emit(valid)),
+    ).subscribe();
+  }
+
+  @Output() formValid = new EventEmitter<boolean>();
   @Output() submitForm = new EventEmitter<DndItemCreateDTO>();
-  constructor(private fb: FormBuilder) { }
+  @Input() mode: dialogMode = dialogMode.View;
+  @Input() set item(item: DndItem | undefined) {
+    this._item = item;
+    if (item) {
+      this.#patchForm(item);
+    }
+  }
 
-
-  rarities = DndItemRarityOptions;
-  types = DndItemTypeOptions;
-  properties = DndItemPropertiesOptions;
+  get formValue(): DndItemCreateDTO {
+    return this.form.getRawValue();
+  }
+  get item(): DndItem | undefined {
+    return this._item;
+  }
 
   form = this.fb.group<FormItem>({
     name: new FormControl('', { validators: [Validators.required], nonNullable: true }),
@@ -60,15 +82,26 @@ export class FormItemComponent {
     properties: new FormControl(null),
   });
 
-  get formValue(): DndItemCreateDTO {
-    return this.form.getRawValue();
-  }
-  get formValid() {
-    return this.form.valid;
-  }
+  _item: DndItem | undefined = undefined;
+  dialogMode = dialogMode;
+  rarities = DndItemRarityOptions;
+  types = DndItemTypeOptions;
+  properties = DndItemPropertiesOptions;
 
   onSubmit() {
     if (!this.formValid) return
-    console.log(this.formValue);
+    this.submitForm.emit(this.formValue);
+  }
+
+  #patchForm({name, description, value, weight, rarity, type, properties}: DndItem) {
+    this.form.patchValue({
+      name,
+      description,
+      value,
+      weight,
+      rarity,
+      type,
+      properties,
+    });
   }
  }

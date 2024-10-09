@@ -26,5 +26,8 @@ export const dndItemReducer = createReducer(
   }),
   on(itemActions.createItemSuccess, (state, { item }) =>
     DndItemAdapter.addOne(item, state)
-  )
+  ),
+  on(itemActions.deleteItemSuccess, (state, { item }) =>
+    DndItemAdapter.removeOne(item.id, state)
+  ),
 );

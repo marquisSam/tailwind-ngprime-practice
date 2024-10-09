@@ -1,5 +1,5 @@
 export interface DndItem {
-  id: number;
+  id: string;
   name: string;
   description?: string;
   value?: number;

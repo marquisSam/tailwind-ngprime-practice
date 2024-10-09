@@ -1,0 +1,37 @@
+<div class="grid grid-cols-2 gap-4">
+  <!-- Name -->
+  <div class="col-span-2 flex flex-col gap-2 p-2 bg-slate-200 border-b border-slate-300 rounded">
+    <h2 class="text-sm">Name</h2>
+    <span class="font-semibold">{{ item?.name }}</span>
+  </div>
+  <!-- Weight -->
+  <div class="col-span-1 flex flex-col gap-2 p-2 bg-slate-200 border-b border-slate-300 rounded">
+    <h2 class="text-sm">Weight</h2>
+    <span class="font-semibold">{{ item?.weight }}</span>
+  </div>
+  <!-- Value -->
+  <div class="col-span-1 flex flex-col gap-2 p-2 bg-slate-200 border-b border-slate-300 rounded">
+    <h2 class="text-sm">Value</h2>
+    <span class="font-semibold">{{ item?.value }}</span>
+  </div>
+  <!-- Rarity -->
+  <div class="col-span-1 flex flex-col gap-2 p-2 bg-slate-200 border-b border-slate-300 rounded">
+    <h2 class="text-sm">Rarity</h2>
+    <span class="font-semibold">{{ item?.rarity }}</span>
+  </div>
+  <!-- Type -->
+  <div class="col-span-1 flex flex-col gap-2 p-2 bg-slate-200 border-b border-slate-300 rounded">
+    <h2 class="text-sm">Type</h2>
+    <span class="font-semibold">{{ item?.type }}</span>
+  </div>
+  <!-- Properties -->
+  <div class="col-span-2 flex flex-col gap-2 p-2 bg-slate-200 overflow-x-auto border-b border-slate-300">
+    <h2 class="text-sm">Properties</h2>
+    <span class="font-semibold">{{ item?.properties | json }}</span>
+  </div>
+  <!-- Description -->
+  <div class="col-span-2 flex flex-col gap-2 p-2 bg-slate-200 border-b border-slate-300 rounded">
+    <h2 class="text-sm">Description</h2>
+    <span class="font-semibold">{{ item?.description }}</span>
+  </div>
+</div>

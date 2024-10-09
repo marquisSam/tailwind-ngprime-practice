@@ -1,4 +1,3 @@
-
 <div
   class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
 >
@@ -23,6 +22,14 @@
             class="w-full"
             styleClass="w-full"
             (click)="itemSelected.emit(item)"
+          />
+          <p-button
+            severity="danger"
+            pRipple
+            icon="pi pi-trash"
+            class="w-full"
+            styleClass="w-full"
+            (click)="itemDeleted.emit(item.id)"
           />
         </div>
       </ng-template>

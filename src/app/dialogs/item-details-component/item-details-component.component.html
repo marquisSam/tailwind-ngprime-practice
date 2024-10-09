@@ -1,1 +1,17 @@
-<app-form-item></app-form-item>
+@if (isViewMode()) {
+  <app-single-item-view [item]="item()" (edit)="toggleEdit()"></app-single-item-view>
+}@else {
+  <app-form-item [item]="item()" (submitForm)="onSubmit($event)" (formValid)="formValid.set($event)"></app-form-item>
+}
+
+<p-divider />
+
+<div class="flex justify-end gap-4">
+  @if (isViewMode()) {
+    <button pButton type="button" (click)="toggleEdit()">Edit</button>
+  }@else {
+    <button pButton [raised]="true" type="button" severity="secondary" (click)="toggleEdit()">Cancel</button>
+    <button pButton [raised]="true" type="submit" [disabled]="!formValid" form="form-item">Submit</button>
+  }
+</div>
+<ngx-spinner *ngIf="itemIsCreating() || itemIsUpdating()" size="large" [fullScreen]="false"></ngx-spinner>

@@ -22,4 +22,5 @@ import { StringListPipe } from '../../../custom-pipes/string-list.pipe';
 export class ItemsGridComponent {
   @Input() coolItems: DndItem[] = [];
   @Output() itemSelected = new EventEmitter<DndItem>();
+  @Output() itemDeleted = new EventEmitter<string>();
  }

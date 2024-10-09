@@ -1,8 +1,8 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="pt-5">
+<form [formGroup]="form" id="form-item" (ngSubmit)="submitForm.emit(formValue)" class="pt-5">
   <div class="grid grid-cols-2 gap-8">
     <!-- Name -->
     <p-floatLabel class="col-span-2">
-      <input pInputText id="name" formControlName="name" class="w-full" />
+      <input pInputText id="name" formControlName="name" class="w-full"  />
       <label for="name">Name</label>
     </p-floatLabel>
 
@@ -71,7 +71,8 @@
           formControlName="properties"
           optionValue="value"
           optionLabel="label"
-          placeholder="Select Properties" />
+          placeholder="Select Properties"
+        />
       <label for="properties">Properties</label>
     </p-floatLabel>
 
@@ -82,15 +83,10 @@
         class="w-full"
         cols="30"
         pInputTextarea
-        formControlName="description">
+        formControlName="description"
+      >
       </textarea>
       <label for="description">Description</label>
     </p-floatLabel>
-  </div>
-
-  <p-divider />
-
-  <div class="flex justify-end">
-    <button pButton type="submit" [disabled]="!formValid">Submit</button>
   </div>
 </form>
