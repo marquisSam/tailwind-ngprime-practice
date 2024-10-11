@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../global-interfaces';
-import { Bag, BagsCreateDTO } from './model';
+import { Bag, BagsCreateDTO, BagsUpdateDTO } from './model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +20,8 @@ export class BagsService {
   }
   delete(guid: string): Observable<ApiResponse<Bag>> {
     return this.http.delete<ApiResponse<Bag>>(`http://localhost:5113/api/bags/${guid}`);
+  }
+  update(item: BagsUpdateDTO, id: string): Observable<ApiResponse<Bag>> {
+    return this.http.put<ApiResponse<Bag>>(`http://localhost:5113/api/bags/${id}`, item);
   }
 }

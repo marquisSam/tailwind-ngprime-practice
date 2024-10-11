@@ -1,14 +1,12 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import * as itemActions from './actions';
-import { Bag } from './model';
 import { BagsActions } from '.';
+import { Bag } from './model';
 
 export const BagsAdapter = createEntityAdapter<Bag>({
   selectId: (item: Bag) => item.id,
-  sortComparer: (a: Bag, b: Bag): number => {
-    return a.name.localeCompare(b.name);
-  },
+  sortComparer: (a: Bag, b: Bag): number =>
+    new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
 });
 
 export interface BagsState extends EntityState<Bag> {
@@ -30,5 +28,8 @@ export const bagsReducer = createReducer(
   }),
   on(BagsActions.deleteBagSuccess, (state, { data }) => {
     return BagsAdapter.removeOne(data.id, state);
+  }),
+  on(BagsActions.updateBagSuccess, (state, { item }) => {
+    return BagsAdapter.updateOne({ id: item.id, changes: item }, state);
   })
 );

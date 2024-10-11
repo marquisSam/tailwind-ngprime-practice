@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { BagDialogueComponent } from '../dialogs/bagDialogue/bagDialogue.component';
+import { BagDialogueComponent } from '../dialogs/entity-view-edit-dialog-controller/bagDialogue/bagDialogue.component';
 import { DndItem } from '../stores/items/model';
-import { ItemDetailsComponentComponent } from '../dialogs/item-details-component/item-details-component.component';
+import { ItemDetailsComponentComponent } from '../dialogs/entity-view-edit-dialog-controller/item-details-component/item-details-component.component';
 import { dialogMode } from '../dialogs/dialog-model';
 import { Bag } from '../stores/bags/model';
 @Injectable({
@@ -32,7 +32,7 @@ export class OpenModalService {
   openItemDialog(data?: DndItem, mode: dialogMode = dialogMode.View): DynamicDialogRef {
     return this.dialogService.open(ItemDetailsComponentComponent, {
       ...this.modalConfig,
-      header: 'Add Item',
+      header: mode === dialogMode.View ? 'View Item' : 'Edit Item',
       data: {
         mode,
         data,

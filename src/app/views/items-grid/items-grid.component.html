@@ -16,19 +16,17 @@
       </ng-template>
       <p>{{ item.description }}</p>
       <ng-template pTemplate="footer">
-        <div class="flex gap-3 mt-1">
+        <div class="flex  gap-3 mt-1 justify-cont-end">
           <p-button
-            label="View Item"
-            class="w-full"
-            styleClass="w-full"
+            icon="pi pi-eye"
+            size="small"
             (click)="itemSelected.emit(item)"
-          />
-          <p-button
+            />
+            <p-button
+            size="small"
             severity="danger"
             pRipple
             icon="pi pi-trash"
-            class="w-full"
-            styleClass="w-full"
             (click)="itemDeleted.emit(item.id)"
           />
         </div>

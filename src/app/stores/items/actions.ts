@@ -1,5 +1,5 @@
 import { createAction } from '@ngrx/store';
-import { DndItem, DndItemCreateDTO } from './model';
+import { DndItem, DndItemCreateDTO, DndItemUpdateDTO } from './model';
 
 // Get Items
 export const getItems = createAction('[Items] Get Items');
@@ -40,3 +40,16 @@ export const deleteItemFailure = createAction(
   (error: any) => ({ error })
 );
 
+//update item
+export const updateItem = createAction(
+  '[Items] Update Item',
+  (item: DndItemUpdateDTO, id: string) => ({ item, id })
+);
+export const updateItemSuccess = createAction(
+  '[Items] Update Item Success',
+  (item: DndItem) => ({ item })
+);
+export const updateItemFailure = createAction(
+  '[Items] Update Item Failure',
+  (error: any) => ({ error })
+);

@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DndItem, DndItemCreateDTO } from './model';
+import { DndItem, DndItemCreateDTO, DndItemUpdateDTO } from './model';
 import { ApiResponse } from '../global-interfaces';
 
 @Injectable({
@@ -21,5 +21,12 @@ export class itemsManagerService {
   // DELETE http://localhost:5113/api/items/1
   delete(id: string): Observable<ApiResponse<DndItem>> {
     return this.http.delete<ApiResponse<DndItem>>(`http://localhost:5113/api/items/${id}`);
+  }
+  // PUT http://localhost:5113/api/items/1
+  update(item: DndItemUpdateDTO, id: string): Observable<ApiResponse<DndItem>> {
+    return this.http.put<ApiResponse<DndItem>>(
+      `http://localhost:5113/api/items/${id}`,
+      item
+    );
   }
 }

@@ -5,9 +5,8 @@ import { DndItem } from './model';
 
 export const DndItemAdapter = createEntityAdapter<DndItem>({
   selectId: (item: DndItem) => item.id,
-  sortComparer: (a: DndItem, b: DndItem): number => {
-    return a.name.localeCompare(b.name);
-  },
+  sortComparer: (a: DndItem, b: DndItem): number =>
+    new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
 });
 
 export interface DndItemsState extends EntityState<DndItem> {
@@ -29,5 +28,8 @@ export const dndItemReducer = createReducer(
   ),
   on(itemActions.deleteItemSuccess, (state, { item }) =>
     DndItemAdapter.removeOne(item.id, state)
+  ),
+  on(itemActions.updateItemSuccess, (state, { item }) =>
+    DndItemAdapter.updateOne({ id: item.id, changes: item }, state)
   ),
 );

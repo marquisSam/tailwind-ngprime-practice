@@ -5,7 +5,7 @@ import { catchError, delay, finalize, map, of, switchMap, tap, timeInterval } fr
 import { BagsActions } from '.';
 import { ApiResponse } from '../global-interfaces';
 import { LoadingStateService } from '../loading-state.service';
-import { Bag, BagsCreateDTO } from './model';
+import { Bag, BagsCreateDTO, BagsUpdateDTO } from './model';
 import { BagsService } from './service';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -69,6 +69,23 @@ export class BagsEffects {
             of(BagsActions.deleteBagFailure({ error: error.message }))
           ),
           finalize(() => this.spinner.hide(guid))
+        )
+      })
+    )
+  );
+
+  updateBag$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BagsActions.updateBag),
+      switchMap(({ data, id }: { data: BagsUpdateDTO, id: string }) => {
+        this.loadingStateService.bagIsUpdating.set(true);
+        return this.bagsService.update(data, id).pipe(
+          delay(1000),
+          map(({data}: ApiResponse<Bag>) => BagsActions.updateBagSuccess(data)),
+          catchError((error: HttpErrorResponse) =>
+            of(BagsActions.updateBagFailure({ error: error.message }))
+          ),
+          finalize(() => this.loadingStateService.bagIsUpdating.set(false))
         )
       })
     )

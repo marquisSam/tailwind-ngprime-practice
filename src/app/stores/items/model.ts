@@ -7,6 +7,8 @@ export interface DndItem {
   rarity?: DndItemRarity;
   type?: DndItemType;
   properties?: DndItemProperties[];
+  updatedAt: Date;
+  createdAt: Date;
 }
 
 export interface DndItemCreateDTO {

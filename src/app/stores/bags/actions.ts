@@ -39,3 +39,17 @@ export const deleteBagFailure = createAction(
   '[Bags] Delete Bag Failure',
   (error: any) => ({ error })
 );
+
+// Update Bag
+export const updateBag = createAction(
+  '[Bags] Update Bag',
+  (data: BagsUpdateDTO, id: string) => ({ data, id })
+);
+export const updateBagSuccess = createAction(
+  '[Bags] Update Bag Success',
+  (item: Bag) => ({ item })
+);
+export const updateBagFailure = createAction(
+  '[Bags] Update Bag Failure',
+  (error: any) => ({ error })
+);

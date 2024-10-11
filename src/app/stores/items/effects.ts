@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, delay, finalize, map, of, switchMap, tap } from 'rxjs';
 import { ItemActions } from '.';
-import { DndItem, DndItemCreateDTO } from './model';
+import { DndItem, DndItemCreateDTO, DndItemUpdateDTO } from './model';
 import { itemsManagerService } from './service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoadingStateService } from '../loading-state.service';
@@ -68,6 +68,23 @@ export class DndItemEffects {
     )
   );
 
+  updateItem$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ItemActions.updateItem),
+      switchMap(({ item, id }: { item: DndItemUpdateDTO, id: string }) => {
+        this.loadingStateService.itemIsUpdating.set(true);
+        return this.entityService.update(item, id).pipe(
+          delay(1000),
+          map(({ data }: ApiResponse<DndItem>) => ItemActions.updateItemSuccess(data)),
+          catchError((error: HttpErrorResponse) =>
+            of(ItemActions.updateItemFailure({ error: error.message }))
+          ),
+          finalize(() => this.loadingStateService.itemIsUpdating.set(false))
+        )
+      })
+    )
+  );
+
 
   createItemSuccess$ = createEffect(() =>
     this.actions$.pipe(
@@ -84,6 +101,16 @@ export class DndItemEffects {
       ofType(ItemActions.deleteItemSuccess),
       tap(({ item }: { item: DndItem }) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: `Item ${item.name} deleted successfully` });
+      })
+    ),
+    { dispatch: false }
+  );
+
+  updateItemSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ItemActions.updateItemSuccess),
+      tap(({ item }: { item: DndItem }) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: `Item ${item.name} updated successfully` });
       })
     ),
     { dispatch: false }
