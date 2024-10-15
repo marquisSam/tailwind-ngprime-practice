@@ -28,20 +28,21 @@ import { selectItemById } from '../../../stores/items/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemDetailsComponentComponent extends EntityViewEditDirective {
-  constructor(private store: Store, private loadingStateService: LoadingStateService, dialogConfig: DynamicDialogConfig) {
+  constructor(private loadingStateService: LoadingStateService, dialogConfig: DynamicDialogConfig) {
     super(dialogConfig);
   }
 
-  item$ = this.store.selectSignal(selectItemById(this.dialogConfig.data?.data?.id));
-  onSubmit(formData: DndItemCreateDTO | DndItemUpdateDTO) {
+  itemIsCreating = computed(() => this.loadingStateService.itemIsCreating());
+  itemIsUpdating = computed(() => this.loadingStateService.itemIsUpdating());
 
-    if (this.item()?.id) {
-      this.store.dispatch(ItemActions.updateItem(formData as DndItemUpdateDTO, this.item()?.id as string));
+  selectedItem = this.store.selectSignal(selectItemById(this.dialogConfig.data?.id));
+
+  onSubmit(formData: DndItemCreateDTO | DndItemUpdateDTO) {
+    if (this.selectedItem()?.id) {
+      this.store.dispatch(ItemActions.updateItem(formData , this.selectedItem()?.id as string));
     } else {
       this.store.dispatch(ItemActions.createItem(formData as DndItemCreateDTO));
     }
     this.toggleEdit();
   }
-  itemIsCreating = computed(() => this.loadingStateService.itemIsCreating());
-  itemIsUpdating = computed(() => this.loadingStateService.itemIsUpdating());
 }

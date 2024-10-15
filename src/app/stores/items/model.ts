@@ -20,15 +20,9 @@ export interface DndItemCreateDTO {
   type?: DndItemType | null;
   properties?: DndItemProperties[] | [] | null;
 }
-export interface DndItemUpdateDTO {
-  name?: string;
-  description?: string;
-  value?: number;
-  weight?: number;
-  rarity?: DndItemRarity;
-  type?: DndItemType;
-  properties?: DndItemProperties[];
-}
+
+export type DndItemUpdateDTO = Partial<DndItemCreateDTO>;
+
 export enum DndItemProperties {
   Consumable = 'Consumable',
   Healing = 'Healing',

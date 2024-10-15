@@ -53,10 +53,10 @@ export class TheCompendiumComponent implements OnInit {
   }
 
   openItem(item: DndItem) {
-    this.openModalService.openItemDialog(item, dialogMode.View);
+    this.openModalService.openItemDialog(dialogMode.View, item?.id);
   }
   createNewItem() {
-    this.openModalService.openItemDialog(undefined, dialogMode.Create);
+    this.openModalService.openItemDialog(dialogMode.Create);
   }
   deleteItem(id: string) {
     this.store.dispatch(ItemActions.deleteItem(id));

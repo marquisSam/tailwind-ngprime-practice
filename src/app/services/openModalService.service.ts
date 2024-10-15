@@ -29,13 +29,13 @@ export class OpenModalService {
       },
     });
   }
-  openItemDialog(data?: DndItem, mode: dialogMode = dialogMode.View): DynamicDialogRef {
+  openItemDialog(mode: dialogMode = dialogMode.View, id?: string): DynamicDialogRef {
     return this.dialogService.open(ItemDetailsComponentComponent, {
       ...this.modalConfig,
       header: mode === dialogMode.View ? 'View Item' : 'Edit Item',
       data: {
         mode,
-        data,
+        id,
       },
     });
   }
